@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarifs - Volzer Campus</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* RESET ET BASE */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* HEADER */
+        .main-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .logo span {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .main-nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #ffd700;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-login, .btn-register {
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-login {
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-register {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-login:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-register:hover {
+            background: #ffd700;
+            color: #333;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 150px 0 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: #ffd700;
+            color: #333;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-primary:hover {
+            background: #ffed4a;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        /* FEATURES GRID */
+        .features-section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            border: 1px solid #e9ecef;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .feature-card.featured {
+            border: 2px solid #ffd700;
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+        }
+
+        .feature-badge {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: #ffd700;
+            color: #333;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-icon i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .feature-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .feature-list li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .feature-list i {
+            color: #28a745;
+        }
+
+        .price {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-feature {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-feature:hover {
+            gap: 1rem;
+            color: #764ba2;
+        }
+
+        /* COMPARISON TABLE */
+        .comparison {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .comparison-table {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-top: 3rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .check {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .cross {
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        /* CTA SECTION */
+        .cta {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .btn-large {
+            padding: 1.2rem 2.5rem;
+            font-size: 1.1rem;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        .cta-features {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .cta-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* FOOTER */
+        .main-footer {
+            background: #2c3e50;
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: #ffd700;
+        }
+
+        .footer-section a {
+            display: block;
+            color: #bdc3c7;
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #ffd700;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .footer-logo span {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            background: #34495e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            background: #ffd700;
+            color: #333;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #34495e;
+            color: #bdc3c7;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .main-nav {
+                display: none;
+            }
+            
+            .header-actions {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="/images/logo.png" alt="Volzer Campus">
+                    <span>Volzer Campus</span>
+                </div>
+                <nav class="main-nav">
+                    <a href="/accueil" class="nav-link">Accueil</a>
+                    <a href="/fonctionnalites" class="nav-link active">Fonctionnalités</a>
+                    <a href="/tarifs" class="nav-link">Tarifs</a>
+                    <a href="/about" class="nav-link">À propos</a>
+                    <a href="/contact" class="nav-link">Contact</a>
+                </nav>
+                <div class="header-actions">
+                    <a href="/login" class="btn-login">Connexion</a>
+                    <a href="/register" class="btn-register">S'inscrire</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Tarifs Volzer Campus</h1>
+                <p class="hero-subtitle">
+                    Découvrez toutes les Tarifs conçues pour révolutionner la communication universitaire
+                </p>
+                <div class="hero-buttons">
+                    <a href="/register" class="btn btn-primary">
+                        <i class="fas fa-rocket"></i>
+                        Essai Gratuit
+                    </a>
+                    <a href="/demo" class="btn btn-secondary">
+                        <i class="fas fa-play"></i>
+                        Voir la Démo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section class="features-section">
+        <div class="container">
+            <h2 class="section-title">Tarifs Principales</h2>
+            <p class="section-subtitle">
+                Une suite complète d'outils pour connecter étudiants, professeurs et administration
+            </p>
+
+            <div class="features-grid">
+                <!-- Messagerie -->
+                <div class="feature-card featured">
+                    <div class="feature-badge">Populaire</div>
+                    <div class="feature-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Messagerie En Ligne</h3>
+                    <p>Chat en temps réel entre étudiants et professeurs avec historique complet</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Messages instantanés</li>
+                        <li><i class="fas fa-check"></i> Groupes de discussion</li>
+                        <li><i class="fas fa-check"></i> Fichiers partagés</li>
+                        <li><i class="fas fa-check"></i> Émojis et réactions</li>
+                    </ul>
+                    <span class="price">Inclus</span>
+                    <a href="/messagerie" class="btn-feature">
+                        <span>Découvrir</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Partage de fichiers -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-upload"></i>
+                    </div>
+                    <h3>Partage de Fichiers</h3>
+                    <p>Échangez documents, présentations et ressources académiques en toute sécurité</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Tous formats supportés</li>
+                        <li><i class="fas fa-check"></i> Stockage cloud</li>
+                        <li><i class="fas fa-check"></i> Accès contrôlé</li>
+                        <li><i class="fas fa-check"></i> Versionning automatique</li>
+                    </ul>
+                    <span class="price">Inclus</span>
+                    <a href="/ressources" class="btn-feature">
+                        <span>Découvrir</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Agenda -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3>Agenda Académique</h3>
+                    <p>Gestion complète des emplois du temps, examens et événements universitaires</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Synchronisation automatique</li>
+                        <li><i class="fas fa-check"></i> Rappels intelligents</li>
+                        <li><i class="fas fa-check"></i> Planning des salles</li>
+                        <li><i class="fas fa-check"></i> Export PDF/iCal</li>
+                    </ul>
+                    <span class="price">Inclus</span>
+                    <a href="/agenda" class="btn-feature">
+                        <span>Découvrir</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Annonces -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3>Annonces & Alertes</h3>
+                    <p>Diffusion d'informations importantes et alertes urgentes à toute l'université</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Notifications push</li>
+                        <li><i class="fas fa-check"></i> Ciblage par filière</li>
+                        <li><i class="fas fa-check"></i> Alertes urgentes</li>
+                        <li><i class="fas fa-check"></i> Historique complet</li>
+                    </ul>
+                    <span class="price">Inclus</span>
+                    <a href="/annonces" class="btn-feature">
+                        <span>Découvrir</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Groupes -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Groupes d'Étude</h3>
+                    <p>Créez et gérez des groupes de travail pour projets et révisions</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Groupes privés/publics</li>
+                        <li><i class="fas fa-check"></i> Outils collaboratifs</li>
+                        <li><i class="fas fa-check"></i> Partage de ressources</li>
+                        <li><i class="fas fa-check"></i> Calendrier partagé</li>
+                    </ul>
+                    <span class="price">Inclus</span>
+                    <a href="/groupes" class="btn-feature">
+                        <span>Découvrir</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Administration -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h3>Panel Administration</h3>
+                    <p>Outils de gestion complets pour administrateurs et responsables</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Gestion des utilisateurs</li>
+                        <li><i class="fas fa-check"></i> Statistiques détaillées</li>
+                        <li><i class="fas fa-check"></i> Modération de contenu</li>
+                        <li><i class="fas fa-check"></i> Rapports automatiques</li>
+                    </ul>
+                    <span class="price">Inclus</span>
+                    <a href="/admin" class="btn-feature">
+                        <span>Découvrir</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Table -->
+    <section class="comparison">
+        <div class="container">
+            <h2 class="section-title">Comparaison des Formules</h2>
+            <p class="section-subtitle">
+                Choisissez la formule qui correspond le mieux aux besoins de votre établissement
+            </p>
+
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Fonctionnalité</th>
+                            <th>Formule Basique</th>
+                            <th>Formule Standard</th>
+                            <th>Formule Premium</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Messagerie instantanée</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                        </tr>
+                        <tr>
+                            <td>Partage de fichiers</td>
+                            <td class="check">✓ (5GB)</td>
+                            <td class="check">✓ (50GB)</td>
+                            <td class="check">✓ (Illimité)</td>
+                        </tr>
+                        <tr>
+                            <td>Agenda académique</td>
+                            <td class="check">✓ Basique</td>
+                            <td class="check">✓ Avancé</td>
+                            <td class="check">✓ Complet</td>
+                        </tr>
+                        <tr>
+                            <td>Groupes d'étude</td>
+                            <td class="check">✓ (max 10)</td>
+                            <td class="check">✓ (max 50)</td>
+                            <td class="check">✓ (Illimité)</td>
+                        </tr>
+                        <tr>
+                            <td>Panel administration</td>
+                            <td class="cross">✗</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓ Avancé</td>
+                        </tr>
+                        <tr>
+                            <td>Support technique</td>
+                            <td>Email</td>
+                            <td>Email + Chat</td>
+                            <td>24/7 Prioritaire</td>
+                        </tr>
+                        <tr>
+                            <td>Prix par mois</td>
+                            <td><strong>Gratuit</strong></td>
+                            <td><strong>250$</strong></td>
+                            <td><strong>500$</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Prêt à transformer votre université ?</h2>
+                <p>Rejoignez les 50+ établissements qui utilisent déjà Volzer Campus</p>
+                <div class="cta-buttons">
+                    <a href="/register" class="btn btn-primary btn-large">
+                        <i class="fas fa-rocket"></i>
+                        Commencer Gratuitement
+                    </a>
+                    <a href="/contact" class="btn btn-outline btn-large">
+                        <i class="fas fa-phone"></i>
+                        Demander une Démo
+                    </a>
+                </div>
+                <div class="cta-features">
+                    <div class="cta-feature">
+                        <i class="fas fa-check"></i>
+                        <span>Essai gratuit 30 jours</span>
+                    </div>
+                    <div class="cta-feature">
+                        <i class="fas fa-check"></i>
+                        <span>Installation assistée</span>
+                    </div>
+                    <div class="cta-feature">
+                        <i class="fas fa-check"></i>
+                        <span>Support dédié</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="/images/logo.png" alt="Volzer Campus">
+                        <span>Volzer Campus</span>
+                    </div>
+                    <p>Solution de communication universitaire en ligne</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Produit</h4>
+                    <a href="/fonctionnalites">Fonctionnalités</a>
+                    <a href="/tarifs">Tarifs</a>
+                    <a href="/telecharger">Télécharger</a>
+                    <a href="/documentation">Documentation</a>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Entreprise</h4>
+                    <a href="/about">À propos</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/carrieres">Carrières</a>
+                    <a href="/blog">Blog</a>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <a href="/aide">Centre d'aide</a>
+                    <a href="/contact">Support technique</a>
+                    <a href="/mentions">Mentions légales</a>
+                    <a href="/confidentialite">Confidentialité</a>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-envelope"></i> contact@volzercampus.com</p>
+                    <p><i class="fas fa-phone"></i> +243 816 835 535</p>
+                    <p><i class="fas fa-map-marker-alt"></i> RDCongo Kinshasa</p>
+                    <p><i class="fas fa-user"></i> Prince Adikey</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>
+                    &copy; 2024 Volzer Campus. Développé par Prince Adikey. Tous droits réservés.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Animation simple au scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const featureCards = document.querySelectorAll('.feature-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            featureCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'all 0.6s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
