@@ -1,0 +1,190 @@
+<html lang="fr">
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volzer Campus - Communication Hors Ligne</title>
+    <link rel="stylesheet" href="/css/index.css">
+    <!-- Font Awesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Status Bar - Indicateur de connexion -->
+    <div class="status-bar" id="statusBar">
+        <i class="fas fa-wifi"></i>
+        <span id="statusText">Mode hors ligne activé</span>
+    </div>
+
+    <!-- Loading Animation -->
+    <div class="loading-container" id="loadingContainer">
+        <div class="loading-logo">
+            <img src="/images /logo.png" alt="Volzer Université" class="logo-image">
+            <div class="logo-text">
+                <i class="fas fa-university"></i>
+                <span>Volzer Campus</span>
+            </div>
+        </div>
+        <div class="loading-bar">
+            <div class="loading-progress" id="loadingProgress"></div>
+        </div>
+        <div class="loading-text" id="loadingText">Initialisation du système...</div>
+        
+        <!-- Accueil pendant le chargement -->
+        <div class="welcome-preview">
+            <div class="preview-features">
+                <div class="preview-feature">
+                    <i class="fas fa-comments"></i>
+                    <span>Messagerie Hors Ligne</span>
+                </div>
+                <div class="preview-feature">
+                    <i class="fas fa-file-upload"></i>
+                    <span>Partage de Fichiers</span>
+                </div>
+                <div class="preview-feature">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Agenda Académique</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent" style="display: none;">
+        <div class="welcome-container">
+            <!-- Header avec logo -->
+            <div class="page-header">
+                <img src="/images/logo.png" alt="Volzer Université" class="header-logo">
+                <div class="header-titles">
+                    <h1 class="welcome-title">Volzer Campus</h1>
+                    <h2 class="welcome-subtitle">Communication universitaire hors ligne</h2>
+                </div>
+            </div>
+            
+            <div class="tech-animation">
+                <i class="fas fa-comments tech-item" style="top: 10%; left: 5%;"></i>
+                <i class="fas fa-file-upload tech-item" style="top: 30%; left: 15%;"></i>
+                <i class="fas fa-calendar-alt tech-item" style="top: 20%; right: 10%;"></i>
+                <i class="fas fa-users tech-item" style="bottom: 20%; left: 10%;"></i>
+                <i class="fas fa-network-wired tech-item" style="bottom: 10%; right: 15%;"></i>
+                <i class="fas fa-shield-alt tech-item" style="top: 50%; left: 50%;"></i>
+            </div>
+            
+            <p class="welcome-message">
+                Plateforme de communication développée pour les universités en zones à faible connexion.
+                Messagerie instantanée, partage de fichiers, agenda académique - tout fonctionne localement sur votre réseau universitaire.
+            </p>
+
+            <!-- Features Grid -->
+            <div class="features-grid">
+                <div class="feature-card" data-feature="messagerie">
+                    <div class="feature-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3 class="feature-title">Messagerie Hors Ligne</h3>
+                    <p class="feature-desc">Chat en temps réel sur le réseau local</p>
+                    <div class="feature-stats">
+                        <i class="fas fa-users"></i>
+                        <span>32 utilisateurs en ligne</span>
+                    </div>
+                </div>
+
+                <div class="feature-card" data-feature="fichiers">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-upload"></i>
+                    </div>
+                    <h3 class="feature-title">Partage de Fichiers</h3>
+                    <p class="feature-desc">Échangez documents et ressources</p>
+                    <div class="feature-stats">
+                        <i class="fas fa-file"></i>
+                        <span>15 fichiers partagés</span>
+                    </div>
+                </div>
+
+                <div class="feature-card" data-feature="agenda">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Agenda Académique</h3>
+                    <p class="feature-desc">Gestion des emplois du temps</p>
+                    <div class="feature-stats">
+                        <i class="fas fa-clock"></i>
+                        <span>8 cours aujourd'hui</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="buttons-container">
+                <a href="accueil.html" class="btn btn-secondary">
+                    <i class="fas fa-user-plus"></i> Créer un compte
+                </a>
+                <a href="accueil.html" class="btn btn-primary">
+                    <i class="fas fa-sign-in-alt"></i> Se connecter
+                </a>
+                <a href="accueil.html" class="btn btn-tertiary">
+                    <i class="fas fa-user-shield"></i> Mon profil
+                </a>
+                <a href="accueil.html" class="btn btn-secondary">
+                    <i class="fas fa-home"></i> Accueil du site 
+                </a>
+                <!-- Bouton Admin caché - visible seulement pour les admins -->
+                <a href="/admin" class="btn-admin" style="display: none;" id="adminBtn">
+                    <i class="fas fa-cog"></i>
+                    Admin
+                </a>
+            </div>
+
+            <!-- Connection Status -->
+            <div class="connection-status">
+                <div class="status-indicator" id="connectionIndicator">
+                    <i class="fas fa-wifi"></i>
+                    <span>Statut: <span id="connectionStatus">Connecté</span></span>
+                </div>
+                <div class="local-users" id="localUsers">
+                    <i class="fas fa-users"></i>
+                    <span>Utilisateurs locaux: <span id="usersCount">0</span></span>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <h3>Accès Rapide</h3>
+                <div class="action-buttons">
+                    <a href="/reseau" class="action-btn">
+                        <i class="fas fa-comment-dots"></i>
+                        <span>Messagerie</span>
+                    </a>
+                    <a href="accueil.html" class="action-btn">
+                        <i class="fas fa-folder-open"></i>
+                        <span>Ressources</span>
+                    </a>
+                    <a href="fonctionnalites.html" class="action-btn">
+                        <i class="fas fa-calendar-day"></i>
+                        <span>Agenda</span>
+                    </a>
+                    <a href="tarifs.html" class="action-btn">
+                        <i class="fas fa-bullhorn"></i>
+                        <span>Annonces</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="/images /logo.png" alt="Volzer Université" class="footer-logo-img">
+                <span>Volzer Université</span>
+            </div>
+            <p class="footer-text">
+                &copy; 2024 Volzer Université. Développé par Prince Adikey. 
+                <span class="version">Version 1.0 - Mode Hors Ligne</span>
+            </p>
+        </div>
+    </footer>
+
+    <script src="/js/index.js"></script>
+</body>
+</html>
